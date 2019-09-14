@@ -9,34 +9,61 @@
 import Foundation
 import UIKit
 struct AssociatedKeys {
-    static var statBlockKey: String = "JLStatBlockKey"
+    static var statKey: String = "JLStatKey"
 }
 
 extension JLSpace where Base: UIView {
     
     func setStatBlock<E>(defaultEnum: E, block: @escaping (Base, E) -> ()) {
+        typealias STATBE = STAT<Base, E>
+        let stat = STATBE(e: defaultEnum, block: block)
+        objc_setAssociatedObject(self.base, &AssociatedKeys.statKey, stat, .OBJC_ASSOCIATION_RETAIN)
+        
         block(self.base, defaultEnum)
-        objc_setAssociatedObject(self.base, &AssociatedKeys.statBlockKey, block, .OBJC_ASSOCIATION_RETAIN)
     }
     
     func setStat<E>(e: E) {
-        typealias STATBLOCK = (Base, E) -> ()
-        if let statBlock = objc_getAssociatedObject(self.base, &AssociatedKeys.statBlockKey) as? STATBLOCK {
-            statBlock(self.base, e)
+        typealias STATBE = STAT<Base, E>
+        if var stat = objc_getAssociatedObject(self.base, &AssociatedKeys.statKey) as? STATBE {
+            stat.block?(self.base, e)
+            stat.e = e
+            objc_setAssociatedObject(self.base, &AssociatedKeys.statKey, stat, .OBJC_ASSOCIATION_RETAIN)
         }
+    }
+    
+    func getStat<E>() -> E? {
+        if let statBlock = objc_getAssociatedObject(self.base, &AssociatedKeys.statKey) as? STAT<Base, E> {
+            return statBlock.e
+        }
+        return nil
     }
 }
 
-extension UIView {
-    func setStatBlock<Base, T>(base: Base, defaultEnum: T, block: @escaping (Base, T) -> ()){
-        block(base, defaultEnum)
-        objc_setAssociatedObject(self, &AssociatedKeys.statBlockKey, block, .OBJC_ASSOCIATION_RETAIN)
-    }
+struct STAT<Base, E> {
+    typealias STATBLOCK = (Base, E) -> ()
     
-    func setStat<Base, T>(base: Base, e: T) {
-        typealias STATBLOCK = (Base, T) -> ()
-        if let statBlock = objc_getAssociatedObject(self, &AssociatedKeys.statBlockKey) as? STATBLOCK {
-            statBlock(base, e)
-        }
+    var block: STATBLOCK?
+    var e: E?
+    init(e: E, block: @escaping STATBLOCK) {
+        self.block = block
+        self.e = e
+        print("STAT init")
+    }
+}
+
+
+enum STATTF: Int {
+    case trueCase = 1
+    case falseCase = 0
+}
+
+extension STATTF {
+    
+    static func withBool(_ b: Bool) -> STATTF {
+        return b ? .trueCase : .falseCase
+    }
+
+    func toBool() -> Bool {
+        return self == .trueCase ? true : false
     }
 }

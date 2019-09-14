@@ -17,6 +17,7 @@
 		8CE9A7AA232C1F6400EB767E /* SwiftSTATUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9A7A9232C1F6400EB767E /* SwiftSTATUITests.swift */; };
 		8CE9A7B9232C1F9800EB767E /* JLSapce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9A7B8232C1F9800EB767E /* JLSapce.swift */; };
 		8CE9A7BB232C1FB500EB767E /* JLSTAT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9A7BA232C1FB500EB767E /* JLSTAT.swift */; };
+		8CE9A7BD232C220400EB767E /* UIView+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9A7BC232C220400EB767E /* UIView+Ex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		8CE9A7AB232C1F6400EB767E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8CE9A7B8232C1F9800EB767E /* JLSapce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JLSapce.swift; sourceTree = "<group>"; };
 		8CE9A7BA232C1FB500EB767E /* JLSTAT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JLSTAT.swift; sourceTree = "<group>"; };
+		8CE9A7BC232C220400EB767E /* UIView+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ex.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 			children = (
 				8CE9A7B8232C1F9800EB767E /* JLSapce.swift */,
 				8CE9A7BA232C1FB500EB767E /* JLSTAT.swift */,
+				8CE9A7BC232C220400EB767E /* UIView+Ex.swift */,
 			);
 			path = STAT;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				8CE9A788232C1F6300EB767E /* AppDelegate.swift in Sources */,
 				8CE9A7B9232C1F9800EB767E /* JLSapce.swift in Sources */,
 				8CE9A78A232C1F6300EB767E /* SceneDelegate.swift in Sources */,
+				8CE9A7BD232C220400EB767E /* UIView+Ex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
